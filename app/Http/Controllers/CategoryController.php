@@ -2,19 +2,19 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Product;
 use Illuminate\Http\Request;
+use App\Models\Category;
 
-class ProductController extends Controller
+class CategoryController extends Controller
 {
-    /**
+     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
     public function index()
     {
-        return Product::all();
+        return Category::all();
     }
 
     /**
@@ -27,12 +27,10 @@ class ProductController extends Controller
     {
         $request->validate([
             'name' => 'required',
-            'category_id' => 'required',
-            'slug' => 'required',
-            'price' => 'required'
+
         ]);
 
-        return Product::create($request->all());
+        return Category::create($request->all());
     }
 
     /**
@@ -43,7 +41,7 @@ class ProductController extends Controller
      */
     public function show($id)
     {
-        return Product::find($id);
+        return Category::find($id);
     }
 
     /**
@@ -55,7 +53,7 @@ class ProductController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $product = Product::find($id);
+        $product = Category::find($id);
         $product->update($request->all());
         return $product;
     }
@@ -68,17 +66,16 @@ class ProductController extends Controller
      */
     public function destroy($id)
     {
-        return Product::destroy($id);
+        return Category::destroy($id);
     }
 
-     /**
-     * Search for a name
-     *
-     * @param  str  $name
-     * @return \Illuminate\Http\Response
-     */
-    public function search($name)
+
+    public function getproducts($id)
     {
-        return Product::where('name', 'like', '%'.$name.'%')->get();
+         
+        $products = Category::find($id)->products;
+        return $products; 
     }
+
+
 }
