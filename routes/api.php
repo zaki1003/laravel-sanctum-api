@@ -31,6 +31,8 @@ Route::get('/products/search/{name}', [ProductController::class, 'search']);
 Route::post('/categories', [CategoryController::class, 'store']);
 Route::get('/categories', [CategoryController::class, 'index']);
 Route::get('/getproducts/{id}', [CategoryController::class, 'getproducts']);
+
+// must be authentified 
 Route::post('/products', [ProductController::class, 'store']);
 
 // Protected routes
